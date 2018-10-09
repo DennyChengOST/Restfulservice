@@ -7,18 +7,21 @@ using TestApi.Interfaces.Repositories;
 
 namespace TestApi.Managers
 {
-    class ProductDetailsManager
+    public class ProductDetailsManager
     {
         #region Fields
 
         private readonly IProductPricesRepository _productPricesRepository;
 
+        private readonly IRedSkyRepository _redSkyRepository;
+
         #endregion
 
         #region Constructors
-        public ProductDetailsManager(IProductPricesRepository productPricesRepository)
+        public ProductDetailsManager(IProductPricesRepository productPricesRepository, IRedSkyRepository redSkyRepository)
         {
             _productPricesRepository = productPricesRepository;
+            _redSkyRepository = redSkyRepository;
         }
 
         #endregion
@@ -29,10 +32,10 @@ namespace TestApi.Managers
         {
             //take in a string
             //Call out to HTTP GET for product name
-            var productName
+            var productName = _redSkyRepository.GetProductName(id);
             //Call out to MongoPrice
             var productPrice = _productPricesRepository.GetProductCurrentPrice(id);
-            //Send to builder
+            //Send to builder or just assemble response obj here?
             //returns object from builder
 
         }

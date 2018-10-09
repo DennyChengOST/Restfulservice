@@ -109,6 +109,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Factory\IClientFactory.cs" />
     <Compile Include="Repositories\IProductPricesRepository.cs" />
+    <Compile Include="Repositories\IRedSkyRepository.cs" />
+    <Compile Include="Repositories\ServiceClients\IRedSkyServiceClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestApi.ServiceModel\TestApi.ServiceModel.csproj">
