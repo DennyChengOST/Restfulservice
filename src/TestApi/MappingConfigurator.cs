@@ -1,6 +1,6 @@
 using AutoMapper;
-using MyRetailService.Api.DataModels;
 
+using MyRetailService.Api.DataModels;
 using TestApi.ServiceModel.Messages;
 
 namespace TestApi
@@ -12,6 +12,7 @@ namespace TestApi
             var config = new MapperConfiguration(mapperConfiguration =>
             {
                 MapServiceModelToDataModel(mapperConfiguration);
+                MapDataModelToServiceModel(mapperConfiguration);
             });
             return config.CreateMapper();
 
@@ -20,6 +21,12 @@ namespace TestApi
         private static void MapServiceModelToDataModel(IProfileExpression mapperConfiguration)
         {
             mapperConfiguration.CreateMap<GetProductDetailsRequest, ProductDetailsModel>();
+
+        }
+
+        private static void MapDataModelToServiceModel(IProfileExpression mapperConfiguration)
+        {
+            mapperConfiguration.CreateMap<ProductDetailsModel, GetProductDetailsResponse>();
 
         }
     }

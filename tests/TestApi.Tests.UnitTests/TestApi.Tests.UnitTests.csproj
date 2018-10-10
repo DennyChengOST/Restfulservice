@@ -136,6 +136,7 @@
     <Compile Include="FoodAccessShould.cs" />
     <Compile Include="Helpers\AppConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ProductDetailsServiceShould.cs" />
     <Compile Include="Services\ServiceDefinitionInfoShould.cs" />
   </ItemGroup>
   <ItemGroup>

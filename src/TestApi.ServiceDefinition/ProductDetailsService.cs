@@ -38,10 +38,10 @@ namespace TestApi.ServiceDefinition
             //figure I made a datamodel for future casing scenarios where they wanted to
             //get different sets of data by ID or other parameters in the future
             //want to get product detaisl by name vs id? am i over thinking it?
-            var productDetailsModel = _mapper.Map<ProductDetailsModel>(request);
-            var response = _productDetailsManager.ReadByProductId(productDetailsModel);
+            var readByProductIdRequest = _mapper.Map<ProductDetailsModel>(request);
+            var readByProductIdResponse = _productDetailsManager.ReadByProductId(readByProductIdRequest);
 
-            var getProductDetailsResponse = _mapper.Map<GetProductDetailsResponse>(response);
+            var getProductDetailsResponse = _mapper.Map<GetProductDetailsResponse>(readByProductIdResponse);
             return getProductDetailsResponse;
         }
 
