@@ -61,6 +61,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack, Version=4.0.62.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.4.0.62\lib\net40\ServiceStack.dll</HintPath>
       <Private>True</Private>
@@ -84,6 +87,10 @@
     <Reference Include="System" />
     <Reference Include="System.Net" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +103,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyRetailService.Api.DataModels\MyRetailService.Api.DataModels.csproj">
+      <Project>{06719BD4-B885-45B8-A655-C34B1130B6E4}</Project>
+      <Name>MyRetailService.Api.DataModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestApi.Interfaces\TestApi.Interfaces.csproj">
       <Project>{756cb3d8-0029-4e34-9db3-7259c71a6321}</Project>
       <Name>TestApi.Interfaces</Name>

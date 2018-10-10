@@ -13,7 +13,7 @@ namespace TestApi.ServiceModel.Messages
     Notes = "Supports getting product details for a given product Id",
     Summary = "Get product details by product id")]
     [DataContract]
-    public class GetProductDetails : IReturn<GetProductDetailsResponse>
+    public class GetProductDetailsRequest : IReturn<GetProductDetailsResponse>
     {
         #region Properties
 

@@ -28,8 +28,9 @@ namespace TestApi.Tests.UnitTests
             //var food = _foodAccess.SearchFood("Grape");
             //_foodAccess.Updatefood("grape","grapesz");
             //var mewo = "meow";
-            _foodAccess.DeleteFood("meow");
-
+            //_foodAccess.DeleteFood("meow");
+            //_foodAccess.StorePrices();
+            var test = _foodAccess.SearchProduct("13860428");
 
 
             //Act

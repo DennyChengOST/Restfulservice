@@ -1,10 +1,11 @@
 using System;
+using TestApi.ServiceModel.Types;
 
 namespace TestApi.Interfaces.Repositories
 {
     public interface IProductPricesRepository
     {
-        object GetProductCurrentPrice(Int64 requestId);
+        ProductPrice GetProductCurrentPrice(Int64 requestId);
 
         object UpdateProductCurrentPrice(string requestId, decimal updatedPrice);
     }

@@ -36,7 +36,7 @@ namespace TestApi.Repositories
 
             using (var client = _clientFactory.GetClient<IRedSkyServiceClient>())
             {
-                var request = new GetProductDetails() { Id = id};
+                var request = new GetProductDetailsRequest() { Id = id};
                 response = client.Get(request);
             }
             return response.Name;

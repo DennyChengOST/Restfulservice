@@ -1,6 +1,7 @@
 using Funq;
 using ServiceStack.Validation;
 using System.Configuration;
+using TestApi.Interfaces.Managers;
 using TestApi.Interfaces.Repositories;
 using TestApi.Interfaces.Repositories.ServiceClients;
 using TestApi.Managers;
@@ -18,6 +19,7 @@ namespace TestApi
             container.RegisterValidators(ReuseScope.Container, typeof(ValidationInfo).Assembly);
 
             // Mapper
+            container.Register(c => MappingConfigurator.CreateMapper());
 
             // Utilities
 
@@ -34,6 +36,8 @@ namespace TestApi
             // Factories
 
             // Managers
+            container.RegisterAs<ProductDetailsManager, IProductDetailsManager>();
+
             //container.RegisterAs<ProductDetailsManager, IProductDetailsManager>();
 
 

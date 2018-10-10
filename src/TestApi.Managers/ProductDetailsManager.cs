@@ -1,13 +1,15 @@
+using MyRetailService.Api.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApi.Interfaces.Managers;
 using TestApi.Interfaces.Repositories;
 
 namespace TestApi.Managers
 {
-    public class ProductDetailsManager
+    public class ProductDetailsManager : IProductDetailsManager
     {
         #region Fields
 
@@ -28,16 +30,26 @@ namespace TestApi.Managers
 
         #region Public Methods
 
-        public void ReadByProductId(Int64 id)
+        public ProductDetailsModel ReadByProductId(ProductDetailsModel productDetailsModel)
         {
-            //take in a string
             //Call out to HTTP GET for product name
-            var productName = _redSkyRepository.GetProductName(id);
-            //Call out to MongoPrice
-            var productPrice = _productPricesRepository.GetProductCurrentPrice(id);
-            //Send to builder or just assemble response obj here?
-            //returns object from builder
-
+            var productName = _redSkyRepository.GetProductName(productDetailsModel.Id);
+            //Make sure productName exists and if so get the product price
+            if(!string.IsNullOrEmpty(productName))
+            {
+                //Call out to MongoPrice
+                var productPrice = _productPricesRepository.GetProductCurrentPrice(productDetailsModel.Id);
+                //nested conditional to check if productPrice is empty? or over doing it :|?
+                productDetailsModel.Name = productName;
+                productDetailsModel.CurrentPrice = productPrice;
+                return productDetailsModel;
+            }
+            else
+            {
+                //Better error message? or is this check even needed? D: 
+                productDetailsModel.Name = "Product name is not found";
+                return productDetailsModel;
+            }
         }
 
         #endregion

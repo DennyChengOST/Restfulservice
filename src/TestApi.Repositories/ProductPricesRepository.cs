@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApi.Interfaces.Repositories;
+using TestApi.ServiceModel.Types;
 
 namespace TestApi.Repositories
 {
@@ -33,11 +34,23 @@ namespace TestApi.Repositories
 
         #region Public Methods
 
-        public object GetProductCurrentPrice(Int64 requestId)
+        public ProductPrice GetProductCurrentPrice(Int64 requestId)
         {
             var getFilter = Builders<BsonDocument>.Filter.Eq("Id", requestId);
 
-            return _collection.Find(getFilter).First();
+            var collection =_collection.Find(getFilter).First();
+            if (!collection.IsBsonNull)
+            {
+                return new ProductPrice()
+                {
+                    CurrencyCode = collection["CurrencyCode"].ToString(),
+                    Value = collection["Value"].ToDecimal()
+                };
+            }
+            else
+            {
+                return new ProductPrice();
+            }
         }
 
         public object UpdateProductCurrentPrice(string requestId, decimal updatedPrice)

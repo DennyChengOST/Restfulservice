@@ -1,10 +1,12 @@
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApi.ServiceModel.Types;
 
 namespace TestApi.Repositories
 {
@@ -39,6 +41,55 @@ namespace TestApi.Repositories
             };
 
             collection.InsertOne(testDocument);
+
+        }
+
+        public void StorePrices()
+        {
+            var connectionString = "mongodb://localhost:27017";
+
+            var client = new MongoClient(connectionString);
+
+            //abstract out the DB
+            var database = client.GetDatabase("ProductPrices");
+
+            var collection = database.GetCollection<BsonDocument>("ProductCurrentPrice");
+
+
+            var testDocument = new BsonDocument()
+            {
+                {"ProductId","13860428"},
+                {"Value",13.49},
+                {"CurrencyCode", "USD" }
+            };
+
+            collection.InsertOne(testDocument);
+
+        }
+
+        public ProductPrice SearchProduct(string productId)
+        {
+            var connectionString = "mongodb://localhost:27017";
+
+            var client = new MongoClient(connectionString);
+
+            //abstract out the DB
+            var database = client.GetDatabase("ProductPrices");
+
+            var collection = database.GetCollection<BsonDocument>("ProductCurrentPrice");
+
+            var filter = Builders<BsonDocument>.Filter.Eq("ProductId", productId);
+
+            var documentFood = collection.Find(filter).First();
+            //var test = BsonSerializer.Deserialize<ProductPrice>(documentFood);
+
+            var productPrice = new ProductPrice()
+            {
+                CurrencyCode = documentFood["CurrencyCode"].ToString(),
+                Value = documentFood["Value"].ToDecimal()
+            };
+
+            return productPrice;
 
         }
 
