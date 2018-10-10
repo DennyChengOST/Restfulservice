@@ -34,10 +34,7 @@ namespace TestApi.ServiceDefinition
 
         public GetProductDetailsResponse Get(GetProductDetailsRequest request)
         {
-            //Should I do serivce model/data model mapping? or just pass directly the ID?
-            //figure I made a datamodel for future casing scenarios where they wanted to
-            //get different sets of data by ID or other parameters in the future
-            //want to get product detaisl by name vs id? am i over thinking it?
+            //Is doing servicemodel/Datamodel too much complexity? D: 
             var readByProductIdRequest = _mapper.Map<ProductDetailsModel>(request);
             var readByProductIdResponse = _productDetailsManager.ReadByProductId(readByProductIdRequest);
 

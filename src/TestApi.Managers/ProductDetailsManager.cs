@@ -36,10 +36,11 @@ namespace TestApi.Managers
             var productName = _redSkyRepository.GetProductName(productDetailsModel.Id);
             //Make sure productName exists and if so get the product price
             if(!string.IsNullOrEmpty(productName))
+
             {
-                //Call out to MongoPrice
-                var productPrice = _productPricesRepository.GetProductCurrentPrice(productDetailsModel.Id);
                 //nested conditional to check if productPrice is empty? or over doing it :|?
+                //MongoCall
+                var productPrice = _productPricesRepository.GetProductCurrentPrice(productDetailsModel.Id);
                 productDetailsModel.Name = productName;
                 productDetailsModel.CurrentPrice = productPrice;
                 return productDetailsModel;
