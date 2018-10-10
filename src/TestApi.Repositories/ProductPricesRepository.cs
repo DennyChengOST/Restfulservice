@@ -34,23 +34,48 @@ namespace TestApi.Repositories
 
         #region Public Methods
 
+        //public ProductPrice GetProductCurrentPrice(Int64 requestId)
+        //{
+        //    var getFilter = Builders<BsonDocument>.Filter.Eq("ProductId", requestId);
+
+        //    var collection =_collection.Find(getFilter).First();
+        //    if (!collection.IsBsonNull)
+        //    {
+        //        return new ProductPrice()
+        //        {
+        //            CurrencyCode = collection["CurrencyCode"].ToString(),
+        //            Value = collection["Value"].ToDecimal()
+        //        };
+        //    }
+        //    else
+        //    {
+        //        return new ProductPrice();
+        //    }
+        //}
+
         public ProductPrice GetProductCurrentPrice(Int64 requestId)
         {
-            var getFilter = Builders<BsonDocument>.Filter.Eq("Id", requestId);
+            var connectionString = "mongodb://localhost:27017";
 
-            var collection =_collection.Find(getFilter).First();
-            if (!collection.IsBsonNull)
+            var client = new MongoClient(connectionString);
+
+            //abstract out the DB
+            var database = client.GetDatabase("ProductPrices");
+
+            var collection = database.GetCollection<BsonDocument>("ProductCurrentPrice");
+
+            var filter = Builders<BsonDocument>.Filter.Eq("ProductId", requestId);
+
+            var documentFood = collection.Find(filter).First();
+            //var test = BsonSerializer.Deserialize<ProductPrice>(documentFood);
+
+            var productPrice = new ProductPrice()
             {
-                return new ProductPrice()
-                {
-                    CurrencyCode = collection["CurrencyCode"].ToString(),
-                    Value = collection["Value"].ToDecimal()
-                };
-            }
-            else
-            {
-                return new ProductPrice();
-            }
+                CurrencyCode = documentFood["CurrencyCode"].ToString(),
+                Value = documentFood["Value"].ToDecimal()
+            };
+
+            return productPrice;
         }
 
         public object UpdateProductCurrentPrice(string requestId, decimal updatedPrice)

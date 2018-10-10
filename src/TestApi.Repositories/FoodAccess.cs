@@ -58,7 +58,7 @@ namespace TestApi.Repositories
 
             var testDocument = new BsonDocument()
             {
-                {"ProductId","13860428"},
+                {"ProductId",12},
                 {"Value",13.49},
                 {"CurrencyCode", "USD" }
             };
